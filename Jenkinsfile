@@ -7,16 +7,12 @@ pipeline {
             steps {
                 echo "Running Selenium Tests using pytest"
 
-                // Install Python dependencies
                 bat 'pip install -r requirements.txt'
 
-                // ✅ Start Flask app in background
                 bat 'start /B python app.py'
 
-                // ⏱️ Wait a few seconds for the server to start
                 bat 'ping 127.0.0.1 -n 5 > nul'
 
-                // ✅ Run tests using pytest
                 bat 'pytest -v'
             }
         }
@@ -30,7 +26,6 @@ pipeline {
 
         stage('Docker Login') {
             steps {
-                // 🔐 Your Docker Hub credentials
                 bat 'docker login -u bvarshii -p Vidya99##'
             }
         }
@@ -54,10 +49,10 @@ pipeline {
 
     post {
         success {
-            echo '✅ Pipeline completed successfully!'
+            echo 'Pipeline completed successfully!'
         }
         failure {
-            echo '❌ Pipeline failed. Please check the logs.'
+            echo 'Pipeline failed. Please check the logs.'
         }
     }
 }
